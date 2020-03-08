@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+
+<channel>
+  <title>Article Collection</title>
+  <link>https://article.maxlist.xyz</link>
+  <description>Article Collection</description>
+    {% for val in data %}
+    <item>
+        <title>【{{val.website_name}}】 {{val.crawler_name}}</title>
+        <link>{{val.crawler_link}}</link>
+        <description>{{val.crawler_description}}</description>
+    </item>
+    {% endfor %}
+</channel>
+</rss>

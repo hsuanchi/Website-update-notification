@@ -1,0 +1,217 @@
+{% extends 'shared/admin/layout.html'%}
+{% block head %}
+<title>Article Collection</title>
+{% endblock%}
+
+{% block body %}
+<!-- BEGIN PAGE HEADER-->
+<h3 class="page-title"> 爬蟲設定
+    <small></small>
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <span>首頁</span>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="/">爬蟲設定</a>
+        </li>
+    </ul>
+</div>
+<!-- END PAGE HEADER-->
+
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN EXAMPLE TABLE PORTLET-->
+        <div class="portlet light ">
+            <div class="portlet-body">
+                <div class="table-toolbar">
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <div class="btn-group">
+                                <button data-toggle="modal" href="#addTaskModal" class="btn green btn-outline"> <i
+                                        class="fa fa-plus"></i>
+                                    Add Task</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-striped table-bordered table-hover" id="sample_1">
+                    <thead>
+                        <tr>
+                            <th> website </th>
+                            <th> change </th>
+                            <th> css-name </th>
+                            <th> css-description </th>
+                            <th> css-link </th>
+                            <th> website_url </th>
+                            <th> remove </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for data in crawler_data%}
+                        <tr>
+                            <td>{{data.website_name}}</a></td>
+                            <td> <button class="btn btn-default btn-outline" data-toggle="modal" href="#updataTaskModal"
+                                    onclick='updataData(
+                                        event, 
+                                        "{{data.wid}}",
+                                        "{{data.website_name}}",
+                                        "{{data.css_name}}", 
+                                        "{{data.css_description}}", 
+                                        "{{data.css_link}}", 
+                                        "{{data.website_url}}",
+                        );'>
+                                    adjust <i class="fa fa-edit"></i>
+                                </button></td>
+                            <td>{{data.css_name}}</td>
+                            <td>{{data.css_description}}</td>
+                            <td>{{data.css_link}}</td>
+                            <td>{{data.website_url}}</td>
+                            <td> <button class="btn red btn-outline" onclick="deleteTask(event, '{{data.wid}}')">
+                                    delete this task </button></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- END EXAMPLE TABLE PORTLET-->
+    </div>
+</div>
+<!-- END CONTAINER -->
+
+
+<!-- addTaskModal -->
+<div class="modal fade" id="addTaskModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form onsubmit="addTask(event)" class="modal-content">
+            <!-- Header Begin -->
+            <div class="modal-header">
+                <h4 class="modal-title">新增任務</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!-- End Header -->
+
+            <!-- Body Begin -->
+            <div class="modal-body">
+                <div class="form-group">
+                    <label calss="control-label">Website:</label>
+                    <input type="text" id="website" class="form-control" placeholder="e.g. Data Studio Help"
+                        aria-describedby="helpId" required>
+                </div>
+                <div class="form-group">
+                    <label for="">Css-Name:</label>
+                    <input type="text" id="name" class="form-control"
+                        placeholder="e.g. soup.find_all(class_='zippy-wrapper')[1].find_all('h4')[i].text"
+                        aria-describedby="helpId" required>
+                </div>
+                <div class="form-group">
+                    <label for="">Css-Description:</label>
+                    <input type="text" id="description" class="form-control"
+                        placeholder="e.g. soup.find_all(class_='zippy-wrapper')[1].find_all('h4')[i].findNext('p').text"
+                        aria-describedby="helpId">
+                </div>
+                <div class="form-group">
+                    <label for="">Css-Link:</label>
+                    <input type="text" id="link" class="form-control"
+                        placeholder="e.g. 'https://support.google.com/datastudio/answer/6311467#'+soup.find_all(class_='zippy-wrapper')[1].find_all('h2')[2+i].get('id')"
+                        aria-describedby="helpId">
+                </div>
+                <div class="form-group">
+                    <label for="">Url:</label>
+                    <input type="text" id="url" class="form-control"
+                        placeholder="e.g. https://support.google.com/datastudio/answer/6311467"
+                        aria-describedby="helpId">
+                </div>
+            </div>
+            <!-- End Body -->
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                <button type="submit" class="btn btn-primary">新增</button>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- addTaskModal end -->
+
+
+<!-- updataTaskModal -->
+<div class="modal fade" id="updataTaskModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <form onsubmit="updataTask(event)" class="modal-content">
+            <!-- Header Begin -->
+            <div class="modal-header">
+                <h4 class="modal-title">修改任務</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!-- End Header -->
+
+            <!-- Body Begin -->
+            <div class="modal-body">
+                <div class="form-group">
+                    <label calss="control-label">Website:</label>
+                    <input type="text" id="updata_website" class="form-control" placeholder="e.g. Data Studio Help"
+                        aria-describedby="helpId" required>
+                </div>
+                <div class="form-group">
+                    <label for="">Css-Name:</label>
+                    <input type="text" id="updata_name" class="form-control"
+                        placeholder="e.g. soup.find_all(class_='zippy-wrapper')[1].find_all('h4')[i].text"
+                        aria-describedby="helpId" required>
+                </div>
+                <div class="form-group">
+                    <label for="">Css-Description:</label>
+                    <input type="text" id="updata_description" class="form-control"
+                        placeholder="e.g. soup.find_all(class_='zippy-wrapper')[1].find_all('h4')[i].findNext('p').text"
+                        aria-describedby="helpId">
+                </div>
+                <div class="form-group">
+                    <label for="">Css-Link:</label>
+                    <input type="text" id="updata_link" class="form-control"
+                        placeholder="e.g. 'https://support.google.com/datastudio/answer/6311467#'+soup.find_all(class_='zippy-wrapper')[1].find_all('h2')[2+i].get('id')"
+                        aria-describedby="helpId">
+                </div>
+                <div class="form-group">
+                    <label for="">Url:</label>
+                    <input type="text" id="updata_url" class="form-control"
+                        placeholder="e.g. https://support.google.com/datastudio/answer/6311467"
+                        aria-describedby="helpId">
+                </div>
+                <div class="form-group" style="display:none;">
+                    <label for="">Id:</label>
+                    <input type="text" id="updata_id" class="form-control" placeholder="e.g. id"
+                        aria-describedby="helpId">
+                </div>
+            </div>
+            <!-- End Body -->
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                <button type="submit" class="btn btn-primary">修改</button>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- updataTaskModal end -->
+
+<script>
+    function updataData(event, wid, website_name, css_name, css_description, css_link, website_url) {
+        $('#updata_id').val(wid)
+        $('#updata_website').val(website_name)
+        $('#updata_name').val(css_name)
+        $('#updata_description').val(css_description)
+        $('#updata_link').val(css_link)
+        $('#updata_url').val(website_url)
+    }
+</script>
+{% endblock%}

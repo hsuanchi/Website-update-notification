@@ -1,0 +1,204 @@
+<!-- BEGIN HEADER -->
+<div class="page-header navbar navbar-fixed-top">
+    <!-- BEGIN HEADER INNER -->
+    <div class="page-header-inner ">
+        <!-- BEGIN LOGO -->
+        <div class="page-logo">
+            <div class="menu-toggler sidebar-toggler">
+            </div>
+        </div>
+        <!-- END LOGO -->
+        <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+        <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse"
+            data-target=".navbar-collapse"> </a>
+        <!-- END RESPONSIVE MENU TOGGLER -->
+
+        <!-- BEGIN PAGE TOP -->
+        <div class="page-top">
+            <!-- BEGIN TOP NAVIGATION MENU -->
+            <div class="top-menu">
+                <ul class="nav navbar-nav pull-right ">
+                    <!-- BEGIN USER LOGIN DROPDOWN -->
+                    <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+
+                    {% if check_auth['is_login'] %}
+
+                    <li class="dropdown dropdown-user">
+                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
+                            data-close-others="true">
+                            <img alt="" class="img-circle" src="/static/assets/layouts/layout2/img/avatar.png" />
+                            <span class="username"> {{check_auth['user']}}</span>
+                            <i class="fa fa-angle-down"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-default">
+                            <li>
+                                <a onclick="logout(event)">
+                                    <i class="icon-key"></i>登出</a>
+                            </li>
+                        </ul>
+                    </li>
+                    {% else %}
+                    <li class="dropdown dropdown-user">
+                        <a onclick="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
+                            data-close-others="true">
+                            <img alt="" class="img-circle" src="/static/assets/layouts/layout2/img/avatar.png" />
+                            <span class="username"> {{check_auth['user']}}</span>
+                            <i class="fa fa-angle-down"></i>
+                        </a>
+
+                        <ul class="dropdown-menu dropdown-menu-default">
+                            <li>
+                                <a data-toggle="modal" href="#signUpModal">
+                                    <i class="icon-key"></i>註冊</a>
+                            </li>
+                            <li>
+                                <a data-toggle="modal" href="#loginModal">
+                                    <i class="icon-key"></i>登入</a>
+                            </li>
+                        </ul>
+                    </li>
+                    {% endif%}
+                    <!-- END USER LOGIN DROPDOWN -->
+                </ul>
+            </div>
+            <!-- END TOP NAVIGATION MENU -->
+        </div>
+        <!-- END PAGE TOP -->
+    </div>
+    <!-- END HEADER INNER -->
+</div>
+<!-- END HEADER -->
+
+<!-- BEGIN HEADER & CONTENT DIVIDER -->
+<div class="clearfix"> </div>
+<!-- END HEADER & CONTENT DIVIDER -->
+
+<!-- BEGIN CONTAINER -->
+<div class="page-container">
+    <!-- BEGIN SIDEBAR -->
+    <div class="page-sidebar-wrapper">
+        <div class="page-sidebar navbar-collapse collapse">
+            <!-- BEGIN SIDEBAR MENU -->
+            <ul class="page-sidebar-menu  page-header-fixed page-sidebar-menu-hover-submenu page-sidebar-menu-closed "
+                data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+
+                <li class="nav-item start ">
+                    <a href="/admin" class="nav-link nav-toggle">
+                        <i class="icon-bar-chart"></i>
+                        <span class="title">文章列表</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <!-- <ul class="sub-menu">
+                        <li class="nav-item start ">
+                            <a href="/" class="nav-link ">
+                                <i class="icon-bar-chart"></i>
+                                <span class="title">產品資訊</span>
+                            </a>
+                        </li>
+                    </ul> -->
+                </li>
+
+                <li class="nav-item  ">
+                    <a href="/admin/status" class="nav-link nav-toggle">
+                        <i class="icon-graph"></i>
+                        <span class="title">爬蟲狀態</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <!-- <ul class="sub-menu">
+                        <li class="nav-item  ">
+                            <a href="/crawler" class="nav-link ">
+                                <i class="icon-wrench"></i>
+                                <span class="title">爬蟲資訊</span>
+                            </a>
+                        </li>
+                    </ul> -->
+                </li>
+                <li class="nav-item  ">
+                    <a href="/admin/crawler" class="nav-link nav-toggle">
+                        <i class="icon-settings"></i>
+                        <span class="title">爬蟲設定</span>
+                        <span class="arrow"></span>
+                    </a>
+                    <!-- <ul class="sub-menu">
+                        <li class="nav-item  ">
+                            <a href="/crawler" class="nav-link ">
+                                <i class="icon-wrench"></i>
+                                <span class="title">爬蟲資訊</span>
+                            </a>
+                        </li>
+                    </ul> -->
+                </li>
+            </ul>
+            <!-- END SIDEBAR MENU -->
+        </div>
+    </div>
+    <!-- END SIDEBAR -->
+    <!-- END CONTAINER -->
+
+
+    <!-- loginModal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <form onsubmit="login(event)" class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Login</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="">Email</label>
+                        <input type="email" id="loginEmail" class="form-control" placeholder=""
+                            aria-describedby="helpId" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Password</label>
+                        <input type="password" id="loginPassword" class="form-control" placeholder=""
+                            aria-describedby="helpId" minlength="6" required>
+                        <!-- <small id="helpId" class="text-muted">minlength 6</small> -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- loginModal end -->
+
+
+    <!-- signUpModal -->
+    <div class="modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <form onsubmit="signUp(event)" class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Sign Up</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="">Email</label>
+                        <input type="email" id="signUpEmail" class="form-control" placeholder=""
+                            aria-describedby="helpId" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Password</label>
+                        <input type="password" id="signUpPassword" class="form-control" placeholder=""
+                            aria-describedby="helpId" minlength="6" required>
+                        <small id="helpId" class="text-muted">minlength 6</small>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Sign Up</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- signUpModal end -->

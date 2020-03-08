@@ -1,0 +1,58 @@
+{% extends 'shared/admin/layout.html'%}
+{% block head %}
+<title>Article Collection</title>
+{% endblock%}
+
+{% block body %}
+<!-- BEGIN PAGE HEADER-->
+<h3 class="page-title"> 文章列表
+    <small></small>
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <span>首頁</span>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="/">文章列表</a>
+        </li>
+    </ul>
+</div>
+<!-- END PAGE HEADER-->
+
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN EXAMPLE TABLE PORTLET-->
+        <div class="portlet light ">
+            <div class="portlet-body">
+                <table class="table table-striped table-bordered table-hover" id="sample_1">
+                    <thead>
+                        <tr>
+                            <th> updatetime </th>
+                            <th> name </th>
+                            <th> description </th>
+                            <th> timestamp </th>
+                            <th> link </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for data in crawler_data%}
+                        <tr>
+                            <td>{{data[6]}}天前</td>
+                            <td>【{{data.website_name}}】- {{data.crawler_name}}</td>
+                            <td>{{data.crawler_description}}</td>
+                            <td>{{data[5]}}</td>
+                            <td><a href='{{data.crawler_link}}'>{{data.website_name}}</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- END EXAMPLE TABLE PORTLET-->
+    </div>
+</div>
+<!-- END CONTAINER -->
+{% endblock%}

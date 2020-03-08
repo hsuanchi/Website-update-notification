@@ -1,0 +1,76 @@
+{% extends 'shared/admin/layout.html'%}
+{% block head %}
+<title>Article Collection</title>
+{% endblock%}
+
+{% block body %}
+<!-- BEGIN PAGE HEADER-->
+<h3 class="page-title"> 爬蟲狀態
+    <small></small>
+</h3>
+<div class="page-bar">
+    <ul class="page-breadcrumb">
+        <li>
+            <i class="icon-home"></i>
+            <span>首頁</span>
+            <i class="fa fa-angle-right"></i>
+        </li>
+        <li>
+            <a href="/">爬蟲狀態</a>
+        </li>
+    </ul>
+</div>
+<!-- END PAGE HEADER-->
+
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN EXAMPLE TABLE PORTLET-->
+        <div class="portlet light ">
+            <div class="portlet-body">
+                <div class="table-toolbar">
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <div class="btn-group">
+                                <button class="btn red btn-outline" onclick="restart(event,'All')">
+                                    <i class=" icon-wrench"></i>
+                                    Restart All Task</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-striped table-bordered table-hover" id="sample_1">
+                    <thead>
+                        <tr>
+                            <th> index </th>
+                            <th> website </th>
+                            <th> status </th>
+                            <th> timestamp </th>
+                            <th> updatetime </th>
+                            <th> task </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for data in crawler_statusLog%}
+                        <tr>
+                            <td>{{loop.index}}</td>
+                            <td><a href='{{data.website_url}}'>{{data.website_name}}</a></td>
+                            <td>{{data.crawler_status}}</td>
+                            <td>{{data[4]}}</td>
+                            <td>{{data[5]}}小時前</td>
+                            <td><a onclick="restart(event,'{{data.website_url}}')">restart</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- END EXAMPLE TABLE PORTLET-->
+    </div>
+</div>
+<!-- END CONTAINER -->
+
+
+
+{% endblock%}

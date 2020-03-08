@@ -1,0 +1,27 @@
+.dialog {
+    background: rgba(179, 175, 175, 0.5);
+    display: none;
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 999;
+}
+
+.dialog>.dialog-body {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0 auto;
+    padding: 5px;
+    padding-top: 100px;
+    height: 100%;
+    width: 80%;
+    z-index: 1000;
+}
+
+.dialog>.dialog-body .container {
+    padding-left: 25vw;
+    padding-top: 10vw;
+}

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Article Collection</title>
+
+    <!-- bootstrap.css -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.5.0/css/bootstrap4-toggle.min.css"
+        rel="stylesheet">
+    <!-- fornt-awsome.css -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:black" rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            /*    
+                border: 1px solid black;
+                */
+        }
+
+        /* 深夜模式 */
+        .dark {
+            background: #282c35;
+        }
+
+        .dark p,
+        .dark small,
+        .dark li {
+            color: #dcdcdc;
+        }
+
+        .dark h3,
+        .dark .article {
+            color: #f6f6e9;
+        }
+
+
+        /* 白天模式 */
+        body {
+            background: white;
+        }
+
+        body p,
+        body small,
+        body li {
+            color: black;
+        }
+
+        body h3 {
+            color: #13334c;
+        }
+
+        body .article {
+            color: #005792;
+        }
+    </style>
+    {% block head %}
+
+    {% endblock %}
+</head>
+
+<body class="{{check_auth['mode_type']}}">
+    {% block body %}
+
+    {% endblock %}
+
+    <!-- jquery.js -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <!-- bootstrap.js -->
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.5.0/js/bootstrap4-toggle.min.js"></script>
+
+    <script>
+        (function () {
+            $(document).ready(function () {
+                if ("{{check_auth['mode_type']}}" == 'dark') {
+                    $('body > header > div > div > div:nth-child(1) > div.col-sm-12.col-md-4.my-2 > div > div')
+                        .attr("class", "toggle btn btn-light off")
+                    $('#toggle_switch').prop('checked', false)
+                } else {
+                    $('body > header > div > div > div:nth-child(1) > div.col-sm-12.col-md-4.my-2 > div > div')
+                        .attr("class", "toggle btn btn-dark")
+                }
+                $('.toggle-on').text('dark')
+                $('.toggle-off').text('light')
+                $('a#tag_{{tid}}').attr("class", "mt-1 btn btn-outline-secondary btn-sm active")
+            })
+
+            $('body').on('click', '.toggle_track', function () {
+                if ($('#toggle_switch').prop('checked') == true) {
+                    $(document.body).addClass("dark")
+
+                    setCookie('mode_type', 'dark', 30);
+                } else {
+                    $(document.body).removeClass("dark");
+
+                    setCookie('mode_type', 'light', 30);
+                }
+            })
+
+            function setCookie(cname, cvalue, exdays) {
+                var d = new Date();
+                var exdays = exdays ? exdays : 7; // 預設 7 天
+                d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+                var expires = 'expires=' + d.toGMTString();
+                var path = 'path=/';
+                document.cookie = cname + '=' + cvalue + '; ' + expires + '; ' + path;
+            }
+
+            function getCookie(cname) {
+                var name = cname + '=';
+                var ca = document.cookie.split(';');
+                for (var i = 0; i < ca.length; i++) {
+                    var c = ca[i].trim();
+                    if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+                }
+                return '';
+            }
+        })()
+    </script>
+</body>
+
+</html>

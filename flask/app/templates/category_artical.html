@@ -1,0 +1,87 @@
+{% extends 'shared/category/layout.html'%}
+{% block head %}
+{% endblock%}
+
+{% block body %}
+
+<!-- header 區塊 -->
+<header class="mt-5">
+    <div class="container">
+        <div class="col-12">
+            <div class='row'>
+                <!-- header 區塊 1 -->
+                <div class="col-sm-2 col-md-3 d-none d-sm-block">
+                    <div style="float:right">
+                        <img src="../static/img/max.png"
+                            style="margin-bottom:0;width:3.5rem;height:3.5rem;border-radius:50%;">
+                    </div>
+                </div>
+                <div class="col-sm-10 col-md-5">
+                    <h3 style="font-family:Montserrat, sans-serif;font-size:2.75rem;">
+                        <a href='/' style="box-shadow:none;text-decoration:none;color:var(--textTitle)">
+                            ArticleCollect
+                        </a>
+                    </h3>
+                    <p>
+                        <small>Auto collect article, you can choose type group below.</small>
+                    </p>
+                </div>
+                <div class="col-sm-12 col-md-4 my-2">
+                    <div class='toggle_track'>
+                        <input type="checkbox" id='toggle_switch' checked data-toggle="toggle" data-onstyle="dark">
+                    </div>
+                </div>
+            </div>
+
+            <!-- header 區塊 2 -->
+            <div class='row justify-content-center'>
+                <div class="col-sm-12 col-md-6">
+                    <div>
+                        {% for data in website_tag_attr%}
+                        <a href="/category/{{data[1]}}" id="tag_{{data[1]}}"
+                            class="mt-1 btn btn-outline-secondary btn-sm" role="button">{{data[0]}}</a>
+
+                        {% endfor%}
+                        <p>
+                            {% for data in website_name_attr%}
+                            <li>{{data}}</li>
+                            {% endfor%}
+                        </p>
+                        <p>
+                            <a href="https://www.maxlist.xyz" target="_blank" rel="noopener">Blog</a> •
+                            <a href="{{line_bot_url}}" target="_blank" rel="noopener">Line
+                                Bot</a> •
+                            <a href="/category/{{tid}}/rss.xml" target="_blank" rel="noopenerr">Rss</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</header>
+<!-- article 區塊 -->
+<section>
+    <div class="container">
+        <hr class='header_line my=0'>
+        <article>
+            {% for data in crawler_data%}
+            <div class='row mb-4 justify-content-center'>
+                <div class="col-sm-12 col-md-8">
+                    <div class="article list">
+                        <br>
+                        <h3>
+                            <a class="article" target="_blank" rel="bookmark noopenerr" href='{{data.crawler_link}}'
+                                style="font-family:Montserrat, sans-serif;font-size:1.75rem;margin-bottom:0.4375rem;">{{data.crawler_name}}</a>
+                        </h3>
+                        <small> {{data.website_name}} &nbsp&nbsp</small>
+                        <small>{{data[6]}} days ago</small>
+                        <p>{{data.crawler_description}}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </article>
+    </div>
+</section>
+{% endblock%}
