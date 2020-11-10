@@ -8,7 +8,6 @@
 
 ### 2. 功能：
 
-前台：https://article.maxlist.xyz/
 
 可以瀏覽六大類型 (Google Official Blog、GTM Blog、SEO Blog、Google Analytics、FB Blog、E-Shop) 的文章內容，有各自的 RSS 訂閱，和 LineBot 即時更新通知群組
 
