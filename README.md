@@ -13,7 +13,7 @@
 
 ![image](https://github.com/hsuanchi/Website-update-notification/blob/master/img/article.png)
 
-後台 (ReadOnly)：https://article.maxlist.xyz/admin
+後台 (ReadOnly)
 
 可以確認目前爬蟲健康狀態，在網頁上新增爬蟲任務、修改目前爬蟲設定的 CSS 節點、刪除不需要的爬蟲任務，和 Restart 單隻爬蟲或多隻爬蟲
 
@@ -49,7 +49,7 @@
 
 ### week4 進度：新增 Category 功能
 - [x] 新增：新增爬蟲爬取網站*7
-- [x] 新增：Category 共四大類 ( GoogleBlog, GTM, GA, SEO) 動態網頁
+- [x] 新增：Category 共四大類 (GoogleBlog, GTM, GA, SEO) 動態網頁
 - [x] 新增：Category 的 RSS 網址
 - [x] 調整：重構 Flask 架構，修改成使用工廠模式
 - [x] 調整：選擇深色模式，切換 Category 頁面後深色模式會跳回淺色模式 (用 cookie 存判斷值來解決)
@@ -57,7 +57,7 @@
 - [x] 調整：手機版字體會擋到 - 調整手機版型
 
 ### week5 進度：Docker 部署
-- [x] 完成： Docker compose ( Flask + Nginx ) 部署在 GCP 上
+- [x] 完成： Docker compose (Flask + Nginx) 部署在 GCP 上
 - [x] 完成： CDN Cloudflare 和 SSL Certificate 設定
 - [x] 完成： 定時爬蟲 Cron Job 設定
 - [x] 完成： Line Bot 串接 RSS 的 category 群組
