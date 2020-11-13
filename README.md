@@ -13,7 +13,7 @@
 
 ![image](https://github.com/hsuanchi/Website-update-notification/blob/master/img/article.png)
 
-後台 (ReadOnly)
+後台
 
 可以確認目前爬蟲健康狀態，在網頁上新增爬蟲任務、修改目前爬蟲設定的 CSS 節點、刪除不需要的爬蟲任務，和 Restart 單隻爬蟲或多隻爬蟲
 
